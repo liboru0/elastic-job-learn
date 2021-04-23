@@ -1,0 +1,25 @@
+server:
+  port: 8001
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.10.46.229:3306/security_demo?serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&autoReconnect=true
+    username: root
+    password: shujuformybatis
+    type: com.zaxxer.hikari.HikariDataSource
+
+elasticjob:
+  reg-center:
+    server-lists: 127.0.0.1:2181
+    connection-timeout-milliseconds: 20000
+    session-timeout-milliseconds: 20000
+    max-sleep-time-milliseconds: 20000
+    namespace: elasticjob
+  jobs:
+    DemoJob:
+      elasticJobClass: com.liboru.learn.elasticjoblearn.job.DemoJob
+      cron: 0/30 * * * * ?
+      shardingTotalCount: 3
+      shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
+      overwrite: true
